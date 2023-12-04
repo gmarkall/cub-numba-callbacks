@@ -7,5 +7,6 @@ NVCCFLAGS := --generate-code=arch=compute_75,code=sm_75 -Xcompiler=-Werror -Xcom
 all:
 	nvcc $(NVCCFLAGS) $(INCLUDES) -c example_block_reduce_numba.cu
 	nvcc $(NVCCFLAGS) $(INCLUDES) -c numba_add.cu
+	nvcc $(NVCCFLAGS) $(INCLUDES) -ptx numba_add.cu
 	nvcc $(NVCCFLAGS) -o example_block_reduce_numba example_block_reduce_numba.o numba_add.o
 
