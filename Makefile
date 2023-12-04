@@ -10,3 +10,5 @@ all:
 	nvcc $(NVCCFLAGS) $(INCLUDES) -ptx numba_add.cu
 	nvcc $(NVCCFLAGS) -o example_block_reduce_numba example_block_reduce_numba.o numba_add.o
 
+clean:
+	rm -f example_block_reduce_numba *.o *.ptx

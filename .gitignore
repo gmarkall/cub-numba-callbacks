@@ -1,1 +1,2 @@
 *.o
+example_block_reduce_numba
