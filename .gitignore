@@ -1,2 +1,3 @@
 *.o
 example_block_reduce_numba
+cpp_callback.ptx
