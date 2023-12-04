@@ -14,4 +14,4 @@ all:
 	nvcc $(NVCCFLAGS) -o example_block_reduce_numba example_block_reduce.o numba_callback.o
 
 clean:
-	rm -f example_block_reduce_numba *.o *.ptx
+	rm -f example_block_reduce_numba example_block_reduce_cpp *.o *.ptx
