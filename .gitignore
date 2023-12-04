@@ -1,3 +1,5 @@
 *.o
 example_block_reduce_numba
+example_block_reduce_cpp
 cpp_callback.ptx
+numba_callback.ptx

@@ -11,10 +11,11 @@ def add(a, b):
 def compile_operator(pyfunc, sig, abi_name):
     jitted = cuda.jit(pyfunc)
 
-    def wrapper(a, b):
-        return jitted(a[0], b[0])
+    def wrapper(this, arg0, arg1):
+        return jitted(arg0[0], arg1[0])
 
-    wrapper_argtypes = [types.CPointer(arg) for arg in sig.args]
+    pointer_argtypes = [types.CPointer(arg) for arg in sig.args]
+    wrapper_argtypes = [types.CPointer(types.none)] + pointer_argtypes
     wrapper_sig = sig.return_type(*wrapper_argtypes)
 
     abi_info = {'abi_name': abi_name}
@@ -31,4 +32,5 @@ abi_name = ("_ZNK3AddclIRiS1_EEN4cuda3std"
 sig = int32(int32, int32)
 ptx, resty = compile_operator(add, sig, abi_name)
 
-print(ptx)
+with open('numba_callback.ptx', 'w') as f:
+    f.write(ptx)
