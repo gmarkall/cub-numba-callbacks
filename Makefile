@@ -23,7 +23,7 @@ numba_callback.cubin: numba_callback.ptx
 
 numba_callback.o: numba_callback.cubin
 	fatbinary -64 --image3=kind=elf,sm=75,file=numba_callback.cubin --device-c --embedded-fatbin=numba_callback.fatbin.c
-	gcc -c -x c++ numba_callback.fatbin.c -o numba_callback.o "-I/usr/local/cuda-12.3/bin/../targets/x86_64-linux/include"   -m64
+	gcc -D__CUDA_ARCH__=750 -D__CUDA_ARCH_LIST__=750 -c -x c++ numba_callback.fatbin.c -o numba_callback.o "-I/usr/local/cuda-12.3/bin/../targets/x86_64-linux/include"   -m64
 
 example_block_reduce_numba: numba_callback.o example_block_reduce.o
 	nvcc $(NVCCFLAGS) -o example_block_reduce_numba example_block_reduce.o numba_callback.o
